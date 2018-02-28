@@ -15,7 +15,7 @@ int main(int argc, const char * argv[]) {
     int kq=kqueue();
     if (kq == -1) {
     	fprintf(stderr,"kqueue returned -1.");
-		return 1;
+	return 1;
     }
 
     struct kevent ke;    
@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
 
     if (kevent(kq, &ke, 1, NULL, 0, NULL)<0) {
         fprintf(stderr,"kevent failed.");
-		return 1;
+	return 1;
     }
     
     
@@ -31,11 +31,12 @@ int main(int argc, const char * argv[]) {
         memset(&ke,0,sizeof(struct kevent));
         if(kevent(kq, NULL, 0, &ke, 1, NULL)<0){
 	        fprintf(stderr,"kevent failed.");
-			return 1;
+		return 1;
         }
         
         if (ke.fflags & NOTE_EXIT)
-			break;
+		break;
     }
+	
     return 0;
 }
